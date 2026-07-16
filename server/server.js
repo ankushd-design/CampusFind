@@ -5,7 +5,7 @@ const connectDB = require("./config/db");
 
 dotenv.config();
 
-// Connect to MongoDB
+// Connect Database
 connectDB();
 
 const app = express();
@@ -14,9 +14,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Routes
+app.use("/api/auth", require("./routes/authRoutes"));
+
 // Test Route
 app.get("/", (req, res) => {
-  res.send("🚀 Welcome to CampusFind Backend");
+  res.send("🚀 CampusFind Backend Running...");
 });
 
 const PORT = process.env.PORT || 5000;
