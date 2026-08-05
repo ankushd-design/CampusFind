@@ -1,5 +1,7 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+
 import api from "../services/api";
 import Input from "../components/Input";
 import Button from "../components/Button";
@@ -9,9 +11,12 @@ function Login() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    setLoading(true);
 
     try {
       const res = await api.post("/auth/login", {
@@ -21,11 +26,25 @@ function Login() {
 
       localStorage.setItem("token", res.data.token);
 
-      alert("Login Successful!");
+      await Swal.fire({
+        icon: "success",
+        title: "Login Successful",
+        text: `Welcome back, ${res.data.user.name}!`,
+        timer: 1500,
+        showConfirmButton: false,
+      });
 
       navigate("/");
     } catch (err: any) {
-      alert(err.response?.data?.message || "Login failed");
+      Swal.fire({
+        icon: "error",
+        title: "Login Failed",
+        text:
+          err.response?.data?.message ||
+          "Invalid email or password.",
+      });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -40,28 +59,35 @@ function Login() {
         </h1>
 
         <Input
+          name="email"
           label="Email"
           type="email"
-          placeholder="Enter email"
+          placeholder="Enter your email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
 
         <Input
+          name="password"
           label="Password"
           type="password"
-          placeholder="Enter password"
+          placeholder="Enter your password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
 
-        <Button type="submit">Login</Button>
+        <Button
+          type="submit"
+          loading={loading}
+        >
+          Login
+        </Button>
 
         <p className="mt-5 text-center">
           Don't have an account?{" "}
           <Link
             to="/register"
-            className="font-semibold text-blue-600"
+            className="font-semibold text-blue-600 hover:underline"
           >
             Register
           </Link>
