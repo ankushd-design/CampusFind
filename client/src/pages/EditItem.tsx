@@ -40,7 +40,7 @@ function EditItem() {
       setLocation(item.location);
 
       if (item.image) {
-        setPreview(`http://localhost:5000${item.image}`);
+        setPreview(`https://campusfind-aq4o.onrender.com${item.image}`);
       }
     } catch (err) {
       console.error(err);

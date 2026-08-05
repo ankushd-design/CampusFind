@@ -130,7 +130,7 @@ function ReceivedClaims() {
               <img
                 src={
                   claim.item.image
-                    ? `http://localhost:5000${claim.item.image}`
+                    ? `https://campusfind-aq4o.onrender.com${claim.item.image}`
                     : "https://via.placeholder.com/400x250?text=No+Image"
                 }
                 alt={claim.item.title}

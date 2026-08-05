@@ -37,7 +37,7 @@ function ItemCard({
         <img
           src={
             image
-              ? `http://localhost:5000${image}`
+              ? `https://campusfind-aq4o.onrender.com${image}`
               : "https://via.placeholder.com/500x300?text=No+Image"
           }
           alt={title}

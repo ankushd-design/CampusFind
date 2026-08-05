@@ -87,7 +87,7 @@ function MyClaims() {
               <img
                 src={
                   claim.item.image
-                    ? `http://localhost:5000${claim.item.image}`
+                    ? `https://campusfind-aq4o.onrender.com${claim.item.image}`
                     : "https://via.placeholder.com/500x300?text=No+Image"
                 }
                 alt={claim.item.title}

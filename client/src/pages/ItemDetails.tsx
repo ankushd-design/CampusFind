@@ -150,7 +150,7 @@ function ItemDetails() {
           <img
             src={
               item.image
-                ? `http://localhost:5000${item.image}`
+                ? `https://campusfind-aq4o.onrender.com${item.image}`
                 : "https://via.placeholder.com/900x500?text=No+Image"
             }
             alt={item.title}
